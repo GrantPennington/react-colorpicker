@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import { Box } from '@mui/material';
-import { ColorGradient } from './components/ColorGradient';
 import { CanvasContainer } from './components/CanvasContainer';
 import useCanvas from './hooks/useCanvas';
 

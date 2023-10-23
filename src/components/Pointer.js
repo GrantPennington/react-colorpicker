@@ -8,7 +8,9 @@ export function Pointer({ w, h, bg }) {
     return (
         <Box sx={{ 
             width: w || 15, height: h || 15,
-            backgroundColor: bg || 'white', borderRadius: '50%',
+            backgroundColor: 'none',
+            border: `2px solid ${bg || 'white'}`, 
+            borderRadius: '50%',
             position: 'absolute', 
             top: (!!canvas.absolute_coords) ? canvas.absolute_coords.y : 25,
             left: (!!canvas.absolute_coords) ? canvas.absolute_coords.x : 211,
@@ -16,5 +18,3 @@ export function Pointer({ w, h, bg }) {
         }} />
     )
 }
-
-{/* <Box sx={{ width: 15, height: 15, backgroundColor: 'yellow', position: 'absolute', borderRadius: '50%', top: (!!canvas.absolute_coords) ? canvas.absolute_coords.y : 25, left: (!!canvas.absolute_coords) ? canvas.absolute_coords.x : 211 }} /> */}

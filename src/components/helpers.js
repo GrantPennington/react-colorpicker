@@ -1,7 +1,5 @@
-/*  ### COLOR MODEL TYPES ### 
-    RGB(A), HEX, HSL(A) -> (A) => "alpha-enabled color"
-
-    To make color picker window -> vertical gradient of white to black + a horizontal gradient of the selected color
+/*
+    Functions for converting RGB/RGBA to Hex/HexA and vice versa
 */
 
 export const convertRGBtoHex = (rgb) => {
@@ -17,22 +15,27 @@ export const convertRGBtoHex = (rgb) => {
         }
     }
 
-    let r = (+rgb[0]).toString(16), g = (+rgb[1]).toString(16), b = (+rgb[2]).toString(16);
+    let r = (+rgb[0]).toString(16), g = (+rgb[1]).toString(16), b = (+rgb[2]).toString(16); // converting to strings
 
     if(r.length===1){
-        r = "0" + r;
+        r = "0" + r; // add 0 to front of hex value
     }
     if(g.length===1){
-        g = "0" + g;
+        g = "0" + g; // add 0 to front of hex value
     }
     if(b.length===1){
-        b = "0" + b;
+        b = "0" + b; // add 0 to front of hex value
     }
 
-    return "#"+r+g+b;
+    return "#"+r+g+b; // return the hex from rgb
 }
 
+/* 
+    RGB(A) includes a 4th value, alpha 
+    alpha can be a decimal, percentage, or integer
+*/
 export const convertRGBAtoHexA = (rgba) => {
+    // split "rgba(0,0,0,1)" -> ["0","0","0","1"]
     let sep = rgba.indexOf(",") > -1 ? "," : " "
     rgba = rgba.substr(5).split(")")[0].split(sep)
 
@@ -70,9 +73,3 @@ export const convertRGBAtoHexA = (rgba) => {
     
     return "#" + r + g + b + a;
 }
-
-// const RGB = "rgb(255,25,2)"
-// const RGBA = "rgba(255,130,116,0.5)"
-
-// console.log(`RGB -> ${RGB} ==> HEX -> ${convertRGBtoHex(RGB)}`)
-// console.log(`RGBA -> ${RGBA} ==> HEXA -> ${convertRGBAtoHexA(RGBA)}`)

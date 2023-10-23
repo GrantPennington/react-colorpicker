@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import { CanvasContextProvider } from './CanvasContext'
+import React from 'react'
 import { ColorGradient } from './ColorGradient'
 import { Paper } from '@mui/material'
-import { useTheme } from '@emotion/react'
 import { ColorSlider } from './ColorSlider'
+import { convertRGBAtoHexA } from './helpers'
 
 export function CanvasContainer(props) {
-    const [selected, setSelected] = useState('')
-    const theme = useTheme()
+    /* main color picker component */
     return (
         <Paper sx={{ 
                 width: 400, position: 'absolute', top: '30%', left: '40%', 

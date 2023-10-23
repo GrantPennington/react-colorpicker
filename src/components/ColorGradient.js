@@ -9,7 +9,7 @@ export function ColorGradient(props) {
     const canvasRef = useRef()
 
     useEffect(() => {
-        initCanvas(canvasRef.current, 255, 255)
+        initCanvas(canvasRef.current, 255, 255) // initialize canvas OnMount
     }, [])
 
     return (

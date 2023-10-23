@@ -49,12 +49,12 @@ const CanvasContextProvider = ({ children }) => {
         })
     }
 
-    const fillCanvas = (selectedColor) => {
+    const fillCanvas = () => {
         if(canvas.context===''){
             return ;
         }
+        /* Create horizontal white -> base_color gradient */
         const ctxt = canvas.context
-        //const color = 'rgba(0,0,255,1)'
         let gradientH = ctxt.createLinearGradient(0,0,ctxt.canvas.width,0)
         gradientH.addColorStop(0, '#fff')
         gradientH.addColorStop(1, canvas.base_color)
@@ -69,20 +69,23 @@ const CanvasContextProvider = ({ children }) => {
         ctxt.fillRect(0,0,ctxt.canvas.width, ctxt.canvas.height)
 
         ctxt.createImageData(ctxt.canvas.width, ctxt.canvas.height)
-        getColorFromCoordinates()
+        getColorFromCoordinates() // get color from current pointer coordinates
     }
 
     const handleColorSelect = (e) => {
-        /* Create color context from canvas */
+        /* Handles clicking/selecting a color from the canvas */
         let coords = e.target.getBoundingClientRect()
+        // subtract clientX, clientY from the relative x, y to get accurate coordinates
         let abs_x = e.clientX - coords.x
         let abs_y = e.clientY - coords.y
         let rel_x = e.clientX - coords.x
         let rel_y = e.clientY - coords.y
-        
+
+        /* Get color pixels at x,y coordinates */
         canvas.context.createImageData(canvas.width, canvas.height)
         const pixel = canvas.context.getImageData(rel_x,rel_y,1,1)['data']
         const rgb = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
+        /* setting canvas state  */
         setCanvas((prev) => {
             return {
                 ...prev, 
@@ -92,11 +95,15 @@ const CanvasContextProvider = ({ children }) => {
             }
         })
     }
-
+    /* 
+        The main purpose of this function is to auto select the color at the current x,y coordinates of the pointer,
+        when the slider changes the base_color
+    */
     const getColorFromCoordinates = () => {
-        if(canvas.context===''){
+        if(canvas.context===''){ // return nothing if context doesn't exist
             return ;
         }
+        /* return the color at the current coordinates */
         canvas.context.createImageData(canvas.width, canvas.height)
         const pixel = canvas.context.getImageData(canvas.absolute_coords.x,canvas.absolute_coords.y,1,1)['data']
         const rgb = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`
@@ -104,6 +111,7 @@ const CanvasContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        /* re-fill canvas everytime base_color changes */
         if(canvas.context!==''){
             fillCanvas()
         }
