@@ -2,15 +2,14 @@ import React from 'react'
 import { ColorGradient } from './ColorGradient'
 import { Paper } from '@mui/material'
 import { ColorSlider } from './ColorSlider'
-import { convertRGBAtoHexA } from './helpers'
 
-export function CanvasContainer(props) {
+export function ColorPicker(props) {
     /* main color picker component */
     return (
-        <Paper sx={{ 
+        <Paper sx={{
                 width: 400, position: 'absolute', top: '30%', left: '40%', 
                 display: 'flex', flexDirection: 'column', backgroundColor: '#f7f3f2', 
-                padding: '4px'
+                padding: '4px',
             }}
             elevation={4}
         >
