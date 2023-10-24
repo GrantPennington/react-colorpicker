@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import useCanvas from '../hooks/useCanvas'
+import useCanvas from '../../hooks/useCanvas'
 import { Box, Paper, Typography } from '@mui/material'
 import { convertRGBtoHex } from './helpers'
 import { Pointer } from './Pointer'

@@ -2,9 +2,18 @@ import React from 'react'
 import { ColorGradient } from './ColorGradient'
 import { Paper } from '@mui/material'
 import { ColorSlider } from './ColorSlider'
+import useCanvas from '../../hooks/useCanvas'
 
-export function ColorPicker(props) {
+export function ColorPicker({ value, onChange }) {
     /* main color picker component */
+    const {canvas} = useCanvas()
+    
+    const handleChange = ({target}) => {
+        if(typeof onChange === 'function'){
+            onChange(target.valueAsNumber)
+        }
+    }
+
     return (
         <Paper sx={{
                 width: 400, position: 'absolute', top: '30%', left: '40%', 

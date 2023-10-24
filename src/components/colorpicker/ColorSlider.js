@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
-import useCanvas from '../hooks/useCanvas'
+import useCanvas from '../../hooks/useCanvas'
 
 export function ColorSlider({ w }) {
     const [slider, setSlider] = useState({

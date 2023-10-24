@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import useCanvas from '../hooks/useCanvas'
+import useCanvas from '../../hooks/useCanvas'
 
 export function Pointer({ w, h, bg }) {
     const {canvas} = useCanvas()
