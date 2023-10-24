@@ -3,25 +3,31 @@ import React, { useEffect, useState } from 'react'
 import useCalender from './useCalender'
 
 export function Square({ w, h, label }) {
-    const [isThisMonth, setIsThisMonth] = useState(false)
+    const [isThisMonth, setIsThisMonth] = useState(true)
+    const [bg, setBG] = useState('lightgray')
     const {calender, updateCalender} = useCalender()
 
     const handleSelect = () => {
         updateCalender('selected', label)
     }
 
-    const hanldeHighlight = () => {
+    const handleHighlight = () => {
         if(calender.selected===label){
-            return '#4fc734'
+            setBG('#4fc734')
         }
-        else if(label.getDate()===calender.day){
-            return '#e5a527'
-        } else if(isThisMonth){
-            return 'white'
-        } else if(!isThisMonth) {
-            return 'lightgray'
+        else if(label.getDate()===calender.day && label.getFullYear()===calender.today.getFullYear()){
+            setBG('#e5a527')
+        }
+        else if(!isThisMonth){
+            setBG('lightgray')
+        } else if(isThisMonth) {
+            setBG('white')
         }
     }
+
+    useEffect(() => {
+        handleHighlight()
+    }, [isThisMonth, calender.selected, calender.day])
 
     useEffect(() => {
         if(label.getMonth()+1 === calender.month){
@@ -29,12 +35,12 @@ export function Square({ w, h, label }) {
         } else {
             setIsThisMonth(false)
         }
-    }, [])
+    }, [calender.month, calender.year])
 
     return (
         <Box onClick={handleSelect}
         sx={{ width: w || '100%', height: h || 70, 
-            backgroundColor: hanldeHighlight(),
+            backgroundColor: bg,
             display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', p: '2px', '&:hover': { cursor: 'pointer', backgroundColor: 'gray' },
             border: '1px dotted gray',
         }}>

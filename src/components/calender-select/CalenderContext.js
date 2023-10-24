@@ -7,6 +7,7 @@ const initialState = {
     year: new Date().getFullYear(),
     month: new Date().getMonth()+1,
     day: new Date().getDate(),
+    today: new Date(),
     fullCalender: generateFullCalender(),
     current: '',
     selected: '',

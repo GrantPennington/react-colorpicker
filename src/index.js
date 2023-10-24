@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import { CanvasContextProvider } from './components/colorpicker/CanvasContext';
 import { CalenderContextProvider } from './components/calender-select/CalenderContext';
+import { EventContextProvider } from './components/calender-select/EventContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <CanvasContextProvider>
       <CalenderContextProvider>
-      <App />
+        <EventContextProvider>
+          <App />
+      </EventContextProvider>
       </CalenderContextProvider>
     </CanvasContextProvider>
   </React.StrictMode>

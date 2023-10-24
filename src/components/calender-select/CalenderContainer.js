@@ -3,9 +3,18 @@ import generateFullCalender, { DAY_LABELS, MONTH_MAP } from './helpers';
 import { Calender } from './Calender';
 import useCalender from './useCalender';
 import AddIcon from '@mui/icons-material/Add';
+import EventModal from './EventModal';
 
 export function CalenderContainer(props) {
     const {calender} = useCalender()
+
+    const trigger = (onClick) => {
+      return (
+          <IconButton sx={{ '&:hover': { backgroundColor: 'lightgray' }, borderRadius: '50%', mt: 1 }} onClick={onClick}>
+            <AddIcon />
+          </IconButton>
+      )
+    }
 
     return (
         <>
@@ -27,9 +36,8 @@ export function CalenderContainer(props) {
             }
             <Divider />
           </Box>
-          <IconButton sx={{ '&:hover': { backgroundColor: 'lightgray' }, borderRadius: '50%', mt: 1 }}>
-            <AddIcon />
-          </IconButton>
+          <EventModal trigger={trigger} />
+          
         </Box>
         </>
     )
