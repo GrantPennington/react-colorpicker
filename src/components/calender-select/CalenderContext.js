@@ -10,7 +10,7 @@ const initialState = {
     today: new Date(),
     fullCalender: generateFullCalender(),
     current: '',
-    selected: '',
+    selected: new Date(),
 }
 
 const CalenderContextProvider = ({ children }) => {

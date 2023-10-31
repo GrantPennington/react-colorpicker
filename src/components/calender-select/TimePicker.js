@@ -8,9 +8,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Box, FormControl, Input, InputLabel, MenuItem, OutlinedInput, Select, Typography } from '@mui/material';
 
-export function TimePicker({ id, type }) {
+export function TimePicker({ id, type, handler }) {
     const [open, setOpen] = React.useState(false);
-    const [title, setTitle] = React.useState('')
     const [hour, setHour] = React.useState('3')
     const [minute, setMinute] = React.useState('00')
     const [frame, setFrame] = React.useState('AM')
@@ -27,10 +26,6 @@ export function TimePicker({ id, type }) {
         setOpen(false);
     };
 
-    const handleChange = (e) => {
-        setTitle(e.target.value)
-    }
-
     const handleHourChange = (e) => {
         setHour(e.target.value)
     }
@@ -40,6 +35,10 @@ export function TimePicker({ id, type }) {
     const handleFrameChange = (e) => {
         setFrame(e.target.value)
     }
+
+    React.useEffect(() => {
+        handler(hour,minute,frame)
+    }, [hour,minute,frame])
 
     return (
         <>

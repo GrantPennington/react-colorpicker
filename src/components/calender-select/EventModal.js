@@ -21,6 +21,9 @@ export default function EventModal({ trigger }) {
   const [title, setTitle] = React.useState('')
   const [location, setLocation] = React.useState('')
 
+  const [startTime, setStartTime] = React.useState('')
+  const [endTime, setEndTime] = React.useState('')
+
   const {addEvent} = useEvents()
   const {calender} = useCalender()
 
@@ -32,17 +35,22 @@ export default function EventModal({ trigger }) {
     setOpen(false);
   };
 
+  const handleStartTime = (hour,minute,time) => {
+    setStartTime(`${hour}:${minute} ${time}`)
+  }
+  const handleEndTime = (hour,minute,time) => {
+    setEndTime(`${hour}:${minute} ${time}`)
+  }
+
   const handleSave = () => {
     const date = `${DAY_LABELS[calender.selected.getDay()].label}, ${MONTH_MAP[calender.selected.getMonth()+1]} ${calender.selected.getDate()},${calender.selected.getFullYear()}`
     addEvent(date, {
         // add the data
-        /*
-        title: data.title,
-        location: data.location,
-        isAllDay: data.isAllDay,
-        startTime: data.startTime,
-        endTime: data.endTime,
-        */
+        title: title,
+        location: location,
+        isAllDay: false,
+        startTime: startTime,
+        endTime: endTime,
     })
     handleClose()
   }
@@ -91,14 +99,14 @@ export default function EventModal({ trigger }) {
                 </Box>
                 <Box>
                     <Typography sx={{ ml: 2 }}>Start Time</Typography>
-                    <TimePicker id={'start-time'} type={'start'}/>
-                    <Typography sx={{ ml: 2 }}>End Time</Typography>
-                    <TimePicker id={'end-time'} type={'end'}/>
+                    <TimePicker id={'start-time'} type={'start'} handler={handleStartTime}/>
+                    <Typography sx={{ ml: 2 }} >End Time</Typography>
+                    <TimePicker id={'end-time'} type={'end'} handler={handleEndTime}/>
                 </Box>
             </DialogContent>
             <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Save</Button>
+            <Button onClick={handleSave}>Save</Button>
             </DialogActions>
         </Dialog>
     </div>

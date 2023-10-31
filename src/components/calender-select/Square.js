@@ -15,7 +15,7 @@ export function Square({ w, h, label }) {
         if(calender.selected===label){
             setBG('#4fc734')
         }
-        else if(label.getDate()===calender.day && label.getFullYear()===calender.today.getFullYear()){
+        else if(label.getDate()===calender.day && label.getFullYear()===new Date().getFullYear()){
             setBG('#e5a527')
         }
         else if(!isThisMonth){
